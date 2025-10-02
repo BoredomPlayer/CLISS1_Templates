@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang=en>
-    <head>
-    <title>Exercise 3.8.2 </title>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    </head>
-    <body>
-        <h2>JS Fundamentals</h2>
-        <script>
-        //user input for shape type
-        let shape = prompt("What is the shape you want to calculate the surface?")
-        //
-        if(shape=="rectangle"){
-        // write here the code to calculate the surface of a rectangle
-        //...
-        }
-        else{
-        // write here the code to calculate the surface of a circle
-        //...
-        }
-        </script>
-    </body>
+    <title>Excercise 3.8.2</title>
+</head>
+<body>
+    <script>
+     /*   let width=parseFloat (prompt("What is the width of the rectangle in cm?"))
+        let length=parseFloat (prompt("What is the length of the rectangle in cm?"))
+        let p= (2*width)+(2*length)
+        alert ("the perimeter of the rectangle is: "+p +"cm")*/
+        let pi=Math.PI
+        let radius=parseFloat (prompt("what is the radius of the circle in cm?"))
+        alert("the perimeter of the circle is: "+ (2*pi*radius)+"cm")
+    </script>
+</body>
 </html>
