@@ -1,39 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Exercise 4.2.1</title>
-    </head>
-    <input type="text" id="myText">
-<button onclick="showBox()">Gimme width (in px)</button>
-    <body>
-        <img id="fox" src="../../Chapter 4/Templates/Pictures/Fox.png" style="position:absolute;">
-        <button onclick="hide()"> Hide</button>
-        <script>
-            //1) Ask the user for the dimensions
 
-            //change the width & height of fox accordingly
-            function showBox()  {
-            document.getElementById("fox").style.width = "300px";
-}
-            //2) change the position of the fox to the top right
+<head>
+    <meta charset="utf-8">
+    <title>Exercise 4.2.1</title>
+</head>
+<input type="text" id="myText">
+<button onclick="foxwidth()">Gimme width (in px)</button>
+<button onclick="uprightfox()">move fox to top right</button>
+<button onclick="middlefox()">move fox to middle</button>
+<input type="color" id="colorPicker" onchange="document.getElementById('fox').style.backgroundColor = this.value">
+<button onclick="hidefox()">Hide Fox</button>
+<button onclick="unhidefox()">Unhide Fox</button>
 
-            //3) Ask the user for the background color
-        
-            //change the background of the image
+<body>
+    <img id="fox" src="../../Chapter 4/Templates/Pictures/Fox.png" style="position:absolute;">
+    <script>
+        //1) Ask the user for the dimensions
 
-            //4)function to let the fox dissapear
-            function hide()
-            {
-                //code here to let the fox disappear
-                //...
-            }
+        //change the width & height of fox accordingly
+        function foxwidth() {
+            document.getElementById("fox").style.width = document.getElementById("myText").value + "px";
+            //code here to change the width of the fox
+            //...
+        }
 
-            //5)create a second function to make the fox visible again
+        //2) change the position of the fox to the top right
+        function uprightfox() {
+           document.getElementById("fox").style.position = "absolute";
+              document.getElementById("fox").style.top = "0px";
+              document.getElementById("fox").style.right = "0px";
 
+ 
+        }
+        function middlefox() {
+            document.getElementById("fox").style.position = "absolute";
+            let windowsHeight = window.innerHeight;
+            let windowsWidth = window.innerWidth;
+            document.getElementById("fox").style.top = windowsHeight/2+"px";
+            document.getElementById("fox").style.left = windowsWidth/2+"px";
+        }
+        //3) Ask the user for the background color
 
+        //change the background of the image
 
+        //4)function to let the fox dissapear
+        function hidefox() {   
+            document.getElementById("fox").style.visibility = "hidden";
 
-        </script>
-    </body>
+        }
+
+        //5)create a second function to make the fox visible again
+        function unhidefox() {
+            document.getElementById("fox").style.visibility = "visible";
+        }
+
+    </script>
+</body>
+
 </html>
