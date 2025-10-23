@@ -4,6 +4,12 @@
 <head>
     <meta charset="utf-8">
     <title>Exercise 4.2.1</title>
+    <style>
+        /* ensure the viewport edges align exactly for absolute/fixed placement */
+        body { margin: 0; }
+        /* keep the fox on top when fixed */
+        #fox { z-index: 9999; }
+    </style>
 </head>
 <input type="text" id="myText">
 <button onclick="foxwidth()">Gimme width (in px)</button>
@@ -16,22 +22,21 @@
 <body>
     <img id="fox" src="../../Chapter 4/Templates/Pictures/Fox.png" style="position:absolute;">
     <script>
-        //1) Ask the user for the dimensions
 
-        //change the width & height of fox accordingly
         function foxwidth() {
             document.getElementById("fox").style.width = document.getElementById("myText").value + "px";
-            //code here to change the width of the fox
-            //...
+
         }
 
-        //2) change the position of the fox to the top right
-        function uprightfox() {
-           document.getElementById("fox").style.position = "absolute";
-              document.getElementById("fox").style.top = "0px";
-              document.getElementById("fox").style.right = "0px";
 
- 
+        function uprightfox() {
+
+                const f = document.getElementById("fox");
+                f.style.position = "fixed";
+                f.style.top = "0px";
+                f.style.right = "0px";
+
+                f.style.left = "";
         }
         function middlefox() {
             document.getElementById("fox").style.position = "absolute";
@@ -40,17 +45,12 @@
             document.getElementById("fox").style.top = windowsHeight/2+"px";
             document.getElementById("fox").style.left = windowsWidth/2+"px";
         }
-        //3) Ask the user for the background color
 
-        //change the background of the image
-
-        //4)function to let the fox dissapear
         function hidefox() {   
             document.getElementById("fox").style.visibility = "hidden";
 
         }
 
-        //5)create a second function to make the fox visible again
         function unhidefox() {
             document.getElementById("fox").style.visibility = "visible";
         }

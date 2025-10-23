@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+</html lang=en>
+    <head>
+        <title>Exercise 4.3.1 </title>
+        <meta charset="UTF-8">
+    </head>
+    <body style="text-align: center;">
+        <h1>
+            Manipulation of HTML elements
+        </h1>
+        <h2 id=imageCaption>
+            Winter Image
+        </h2>
+        <img id= "imageSeason" src="../Templates/Pictures/Winter.jpg" width = "400" height="300">
+        <p id="oldText"> Click the button to display different manipulations of HTML elements.</p>
+        <button onclick="showBox()">Click me!</button>
+        <script>
+            function showBox() {
+            if(document.getElementById("imageSeason").src.includes("Winter.jpg")){
+                document.getElementById("imageSeason").src="../Templates/Pictures/Summer.jpg";
+                document.getElementById("imageCaption").style.colour="red"
+                document.getElementById("imageCaption").style.background ="orange";
+                document.getElementById("imageCaption").style.border="5px solid red";
+                document.getElementById("imageCaption").style.backgroundSize="100px"
+                document.getElementById("imageCaption").textContent ="Summer Image";
+            }
+            else if(document.getElementById("imageSeason").src.includes("Summer.jpg")){
+                document.getElementById("imageSeason").src="../Templates/Pictures/Winter.jpg";
+                document.getElementById("imageCaption").style.colour="white"
+                document.getElementById("imageCaption").style.background ="lightblue";
+                document.getElementById("imageCaption").style.border="5px solid grey";
+                document.getElementById("imageCaption").style.backgroundSize=width="100px"
+                document.getElementById("imageCaption").textContent ="Winter Image";
+            }
+            }
+            
+        </script>
+    </body>
+</html>
