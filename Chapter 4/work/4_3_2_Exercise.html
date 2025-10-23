@@ -7,14 +7,27 @@
 <body>
     <h2>Calculator</h2>
     <p id="calcText" ;></p>
-    <img id="imageShape" width="200" height="200">
+    <img id="imageShape" width="400" height="400">
     <script>
-        let shape = prompt("What is the shape you want to calculate the perimeter?")
+        let shape = prompt("What is the shape you want to calculate the perimeter?(rectangle/circle)");
         if (shape == "rectangle") {
-            //write here your code for the rectangle
+            document.getElementById("imageShape").src = "../../Chapter 4/Templates/Pictures/Rectangle_Perimeter.png";
+            let length = parseFloat(prompt("Enter the length of the rectangle:"));
+            let width = parseFloat(prompt("Enter the width of the rectangle:"));
+            let perimeter = 2 * (length + width);
+            document.getElementById("calcText").innerText = "The perimeter of the rectangle is: " + perimeter+ "m².";
+            document.getElementById("calcText").style.color = "blue";
         }
         else if (shape == "circle") {
-            //write here your code for the circle
+            document.getElementById("imageShape").src = "../../Chapter 4/Templates/Pictures/Circle_Perimeter.png";
+            let radius = parseFloat(prompt("Enter the radius of the circle:"));
+            let perimeter = 2 * Math.PI * radius;
+            document.getElementById("calcText").innerText = "The perimeter of the circle is: " + perimeter.toFixed(2)+ "m².";
+            document.getElementById("calcText").style.color = "red";
+        }
+        else {
+            document.getElementById("calcText").innerText = "Invalid shape entered. Please enter 'rectangle' or 'circle'.";
+
         }
     </script>
 </body>
