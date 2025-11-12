@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <title>
+        Exercise 5.4.3 Supermarket
+    </title>
+    <meta charset="UTF-8">
+    <h1>Item Scanner</h1>
+    <p>Type in the input field an item to get to know the price of it. <br>
+        Here is a list of possibilities (SSD 1TB, HDD 2TB,Xbox Series X, iPhone 12 64GB, HDMI cable)</p>
+    <input type="text" id="inputItem">
+    <button id="checkBtn">check</button><br>
+    <p id="outputText"></p>
+</head>
+
+<body>
+    <script>
+        "use strict";
+        document.getElementById("checkBtn").addEventListener("click", check);
+        let Xbox_Series_X="499.99";
+        let iPhone_12_64GB="799.00";
+        let SSD_1TB="109.99";
+        let HDD_2TB="89.99";
+        let HDMI_Cable="19.99";
+
+
+        function check() {
+            //get the value out of the input field
+            let scannedItem=document.getElementById("inputItem").value;  
+            if (scannedItem === "Xbox Series X") {
+                document.getElementById("outputText").innerText="The price of the Xbox Series X is $"+ Xbox_Series_X;
+            } else if (scannedItem === "iPhone 12 64GB") {
+                document.getElementById("outputText").innerText="The price of the iPhone 12 64GB is $"+ iPhone_12_64GB;
+            } else if (scannedItem === "SSD 1TB") {
+                document.getElementById("outputText").innerText="The price of the SSD 1TB is $"+ SSD_1TB;
+            } else if (scannedItem === "HDD 2TB") {
+                document.getElementById("outputText").innerText="The price of the HDD 2TB is $"+ HDD_2TB;
+            } else if (scannedItem === "HDMI cable") {
+                document.getElementById("outputText").innerText="The price of the HDMI cable is $"+ HDMI_Cable;
+            } else {
+                document.getElementById("outputText").innerText="Item not found!";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

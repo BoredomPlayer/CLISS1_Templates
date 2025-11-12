@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <title>
+            Exercise 5.4.2 File download
+        </title>
+        <meta charset="UTF-8">
+    </head>
+    
+    <body>
+        <p id="paragraph">
+            Here will be displayed the remaing download time in seconds.
+        </p>
+        <script>
+        let fileSize = parseFloat(prompt("Enter the file size in MB:"));
+        let downloadSpeed = parseFloat(prompt("Enter the download speed in Mbps:"));
+        let timeInSeconds = (fileSize * 8) / downloadSpeed;
+        
+        if (timeInSeconds > 60) {
+            document.getElementById("paragraph").innerText = "Remaining download time: " + (timeInSeconds / 60).toFixed(2) + " minutes.";
+            document.getElementById("paragraph").style.color = "blue";
+        } else if (timeInSeconds <= 60) {
+            document.getElementById("paragraph").innerText = "Remaining download time: " + timeInSeconds.toFixed(2) + " seconds.";
+            document.getElementById("paragraph").style.color = "green";
+        } else {
+            document.getElementById("paragraph").innerText = "Invalid Data Entered!";
+            document.getElementById("paragraph").style.color = "red";
+        }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <title>
+            Exercise 5.4.1 Login
+        </title>
+        <meta charset="UTF-8">
+    </head>
+    
+    <body>
+        <form> 
+            <div>
+                <label>Please enter your user name:</label>
+                <input type="text" id="userNameField">
+            </div>
+            <div>
+                <label>Please enter your password:</label>
+                <input type="password" id="passwordField">
+            </div>
+            <div>
+                <input value="Login" type="button" id="loginButton">
+            </div>
+        <script>
+        "use strict";
+        document.getElementById("loginButton").addEventListener("click", userLogin)
+
+        function userLogin ()
+        {if (document.getElementById("userNameField").value === "Boredom" && document.getElementById("passwordField").value === "LetMeIn") {
+                alert("Login successful!");
+            } else {
+                alert("Invalid username or password.");
+            }
+        }
+        </script>
+    </body>
+</html>

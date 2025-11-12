@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let score = 0;
+        let q1 = parseInt(prompt("Whats 7 + 11?"));
+        if (q1 === 18) {
+            score++;
+        }
+        let q2 = parseInt(prompt("Whats 20 - 14?"));
+        if (q2 === 6) {
+            score++;
+        }
+        let q3 = parseInt(prompt("Whats 6 * 7?"));
+        if (q3 === 42) {
+            score++;
+        }  
+        let q4 = parseInt(prompt("Whats 56 / 8?"));
+        if (q4 === 7) {
+            score++;
+        }
+        let q5 = parseInt(prompt("Whats 10 + 4 * 2?"));
+        if (q5 === 18) {
+            score++;
+        }
+        if (score ==1 || score ==2)
+        {
+            alert("You scored " + score + " point. Better luck next time!");
+        }
+        else if (score ==3 || score ==4)
+        {
+            alert("You scored " + score + " points. Not bad!");
+        }
+        else if (score ==5)
+        {
+            alert("You scored " + score + " points. Perfect score! Well done!");
+        }
+        else 
+        {
+            alert("You scored " + score + " points. Too bad you didn't get any correct answers.");
+        }
+    </script>
+    
+</body>
+</html>

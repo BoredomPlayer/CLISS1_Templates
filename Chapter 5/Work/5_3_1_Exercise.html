@@ -9,11 +9,35 @@
     <body>
 
         <script>
-        let number1 = parseInt(prompt("give me a number"));
-        let number2 = parseInt(prompt("give me another number"));
-        let number3 = parseInt(prompt("give me one last number"));
+        let number1 = parseInt(prompt("grade of your first test"));
+        let number2 = parseInt(prompt("grade of your second test"));
+        let number3 = parseInt(prompt("grade of your third test"));
 
+        if ((number1 >= number2) && (number1 >= number3)) {
+            alert(number1 + " is the largest number");
+        } else if ((number2 >= number1) && (number2 >= number3)) {
+            alert(number2 + " is the largest number");
+        } else {
+            alert(number3 + " is the largest number");
+        }
+        if ((number1 <= number2) && (number2 <= number3)) {
+            alert("in order: " + number1 + ", " + number2 + ", " + number3);
+        } else if ((number2 <= number1) && (number1 <= number3)) {
+            alert("in order: " + number2 + ", " + number1 + ", " + number3);
+        } else if((number3 <= number1) && (number1 <= number2)) {
+            alert("in order: " + number3 + ", " + number1 + ", " + number2);}
+        else if((number1 <= number3) && (number3 <= number2)) {
+            alert("in order: " + number1 + ", " + number3 + ", " + number2);}
+        else if((number2 <= number3) && (number3 <= number1)) { 
+            alert("in order: " + number2 + ", " + number3 + ", " + number1);}
+        else {
+            alert("in order: " + number3 + ", " + number2 + ", " + number1);}
 
+            if ((number1 + number2 + number3) >= 30) {
+                alert("Your grades are sufficient. \n PASS");
+            } else {
+                alert("Your grades are insufficient. \n FAIL");
+            }
         </script>
     </body>
 </html>
