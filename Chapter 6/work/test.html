@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<input type="button" id="myButton" value="DO NOT PRESS!">
+<!--or <button id="myButton">DO NOT PRESS!</button> -->
+<script>
+function displayAlert(){
+alert("Boom!");
+}
+let myBtn=document.getElementById("myButton");
+myBtn.addEventListener("click",displayAlert);
+</script>
+</body>
+</html>

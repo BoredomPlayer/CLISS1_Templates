@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Exercise: Create a program that asks the user for a number and define a function, which subsequently outputs the double on the website. Each time the user clicks on a button the previously defined function is called and the number doubled. For example, if the user’s input is 4 than the output on the first click should be 8 then 16 and so on.
+        let userInput = prompt("Please enter a number:");
+        let number = parseFloat(userInput); 
+        function doubleNumber() {
+            number *= 2;
+            document.body.innerHTML += `<p>${number}</p>`;
+        }
+        document.body.innerHTML += `<button onclick="doubleNumber()">Double the number</button>`;
+
+        </script>
+
+        </body>
+</html>
