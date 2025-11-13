@@ -7,11 +7,21 @@
 </head>
 <body>
     <script>
-        let febuarydays =prompt("Does Febuary have 28 or 29 days this year?");
-        if (febuarydays != "28" && febuarydays != "29") {
+        let februarydays =prompt("Does February have 28 or 29 days this year?");
+        if (februarydays != "28" && febuarydays != "29") {
             alert("Invalid input! Please enter 28 or 29.");
         }
-       let currentmonth= prompt(What month is it?)
+       let currentmonth= prompt("What month is it?")
+       if (currentmonth === "September" || currentmonth === "June" || currentmonth === "April" || currentmonth === "November" || currentmonth === "september" || currentmonth === "june" || currentmonth === "april" || currentmonth === "november" || currentmonth === "apr" || currentmonth === "jun" || currentmonth === "sep" || currentmonth === "nov") {
+        alert(currentmonth + " has 30 days.");
+       } else if (currentmonth === "January" || currentmonth === "March" || currentmonth === "May" || currentmonth === "July" || currentmonth === "August" || currentmonth === "October" || currentmonth === "December" || currentmonth === "january" || currentmonth === "march" || currentmonth === "may" || currentmonth === "july" || currentmonth === "august" || currentmonth === "october" || currentmonth === "december" || currentmonth === "jan" || currentmonth === "mar" || currentmonth === "may" || currentmonth === "jul" || currentmonth === "aug" || currentmonth === "oct" || currentmonth === "dec") {
+        alert (currentmonth + " has 31 days.");
+       } else if (currentmonth === "February" || currentmonth === "february" || currentmonth === "feb") {
+        alert("February has " + februarydays + " days.");
+       } else {
+        alert("Invalid month name!");
+       }
+
     </script>
 </body>
 </html>

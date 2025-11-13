@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+</html lang=en>
+    <head>
+    <title>5.4.7 Exercise</title>
+    <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Phone status checker</h1>
+        <h2 id= "statusText";></h2>
+        <img id="imageStatus" src="" height="300px" width="200px"></img>
+        <img id="chargingicon" src="" height="100px" width="80px"></img>
+        <br></br> 
+        <script>
+            let batterylevel = Math.floor(Math.random() * 101);
+            let isCharging = Math.random() < 0.5;
+            let statusText = document.getElementById("statusText");
+            let imageStatus = document.getElementById("imageStatus");
+            if (isCharging) {
+                statusText.innerHTML = "The phone is charging. Battery level: " + batterylevel + "%";
+            }     else 
+                statusText.innerHTML = "The phone is not charging. Battery level: " + batterylevel + "%";
+                
+                if (batterylevel <= 50) {
+                    imageStatus.src = "./Pictures/Battery_status_ok.png"; } 
+
+                else if (batterylevel <= 20 && isCharging) {
+                        imageStatus.src= "./Pictures/Battery_status_ok.png";
+                    } 
+
+                else if (batterylevel <= 20) {
+                    imageStatus.src = "./Pictures/Battery_status_low.png";
+                } 
+
+                else if (batterylevel > 50) {
+                    imageStatus.src = "./Pictures/Battery_status_high.png";
+                }
+             if (isCharging) {
+                document.getElementById("chargingicon").src = "./Pictures/Charging_icon.png";
+             }
+            console.log(isCharging)
+        </script>
+    </body>
+</html>

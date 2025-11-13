@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <title>
+            Exercise 5.4.6 Dice
+        </title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="dice_style.css">
+    </head>
+    
+    <body style="text-align: center;">
+    
+        <h1 id="topName">DICE GAME</h1>
+        <h2 id="diceSum">Sum of the two dices is 12 </h2>
+    
+        <br></br>
+    
+        <img id="dice1" src="Dice_Pics/Dice_6.png"></img>
+        <img id="dice2" src="Dice_Pics/Dice_6.png"></img>
+    
+        <br></br>
+    
+        <button id="rollButton">Roll dice</button>
+        <script>
+                    document.getElementById("rollButton").addEventListener("click", rollDice);
+        function rollDice(){
+            let dice1 = Math.floor(Math.random() * 6) + 1;
+            let dice2 = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("dice1").src = "Dice_Pics/Dice_" + dice1 + ".png";
+            document.getElementById("dice2").src = "Dice_Pics/Dice_" + dice2 + ".png";
+            let sum = dice1 + dice2;
+            document.getElementById("diceSum").innerHTML = "Sum of the two dices is " + sum;
+        }
+
+        </script>
+    </body>
+</html>
