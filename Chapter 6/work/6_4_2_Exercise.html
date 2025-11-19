@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Exercise</title>
+    <style>
+        /* layout for the counter: buttons row, count below */
+        body { font-family: Arial, Helvetica, sans-serif; padding: 1rem; }
+        .counter { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+        .buttons { display: flex; gap: 0.5rem; }
+        #value { font-weight: 700; font-size: 1.1rem; margin: 0; }
+        button { padding: 0.4rem 0.6rem; }
+    </style>
+</head>
+<body>
+    <div class="counter">
+        <div class="buttons">
+            <button id="decrement" type="button">Decrement</button>
+            <button id="increment" type="button">Increment</button>
+            <button id="reset" type="button">Reset</button>
+        </div>
+        <p id="value">Count: 0</p>
+    </div>
+
+    <script>
+        // Counter script: initializes at 0 and updates display on button clicks
+        (function () {
+            let count = 0;
+
+            const valueEl = document.getElementById('value');
+            const incBtn = document.getElementById('increment');
+            const decBtn = document.getElementById('decrement');
+            const resetBtn = document.getElementById('reset');
+
+            function render() {
+                valueEl.textContent = 'Count: ' + count;
+            }
+
+            incBtn.addEventListener('click', function () {
+                count += 1;
+                render();
+            });
+
+            decBtn.addEventListener('click', function () {
+                count -= 1;
+                render();
+            });
+
+            resetBtn.addEventListener('click', function () {
+                count = 0;
+                render();
+            });
+
+            // initial render
+            render();
+        })();
+    </script>
+</body>
+</html>
