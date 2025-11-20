@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+                <p><input type="text" id="Num1"></p>
+            <p1><input type="text" id="Num2"></p1>
+</head>
+<body>
+        <div class="counter">
+        <div class="buttons">
+            <button id="Multiply" type="button">Multiply</button>
+            <button id="Divide" type="button">Divide</button>
+        </div>
+        <p id="value">Result: 0</p>
+<script>
+        const multBtn = document.getElementById('Multiply');
+        const divBtn = document.getElementById('Divide');
+        const valueEl = document.getElementById('value');
+        const num1El = document.getElementById('Num1');
+        const num2El = document.getElementById('Num2');
+        function render(result) {
+                valueEl.textContent = 'Result: ' + result;
+            }
+        multBtn.addEventListener('click', function () {
+                const num1 = parseFloat(num1El.value);
+                const num2 = parseFloat(num2El.value);
+                const result = num1 * num2;
+                render(result);
+            });
+        divBtn.addEventListener('click', function () {
+                const num1 = parseFloat(num1El.value);
+                const num2 = parseFloat(num2El.value);
+                if (num2 === 0 || num1 === 0) {
+                    render('Error: Division by zero');
+                } else {
+                    const result = num1 / num2;
+                    render(result);
+                }
+            });
+
+
+
+
+    </script>
+</body>
+</html>

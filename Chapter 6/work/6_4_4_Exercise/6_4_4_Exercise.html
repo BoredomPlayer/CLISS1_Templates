@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 6.4.4</title>
+</head>
+<body style="text-align: center;">
+    
+    <h1 id=topName>Intel Processors</h1>
+
+    <br>
+
+    <p>Choose one of the three intel processors, which you want to display (i.e. i3, i5 or i7)</p>
+    <br>
+    <input type="text" id="processorField" name="name"  minlength="5" maxlength="10" size="25" style="text-align: center;" >
+    <br>
+    <br>
+    
+    <button id="displayButton">Display</button>
+
+    <br>
+    <p id="outputText"></p>
+    <img id="processorPicture" src="">
+
+    <script>
+    document.getElementById("displayButton").addEventListener("click", function() {
+        const processor = document.getElementById("processorField").value.toLowerCase();
+        const outputText = document.getElementById("outputText");
+        const processorPicture = document.getElementById("processorPicture");
+
+        if (processor === "i3" || processor === "i_3" || processor === "intel core i3" || processor === "intel i3" || processor === "I3") {
+            outputText.textContent = "Intel Core i3: Entry-level performance for everyday tasks.";
+            processorPicture.src = "i3.jpg"; // Replace with actual image URL
+        } else if (processor === "i5" || processor === "i_5" || processor === "intel core i5" || processor === "intel i5" || processor === "I5") {
+            outputText.textContent = "Intel Core i5: Balanced performance for multitasking and gaming.";
+            processorPicture.src = "i5.jpg"; // Replace with actual image URL
+        } else if (processor === "i7" || processor === "i_7" || processor === "intel core i7" || processor === "intel i7" || processor === "I7") {
+            outputText.textContent = "Intel Core i7: High performance for demanding applications.";
+            processorPicture.src = "i7.jpg"; // Replace with actual image URL
+        } else {
+            outputText.textContent = "Please enter a valid processor type: i3, i5, or i7.";
+            processorPicture.src = "";
+        }
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Exercise 6.4.6 Monkey</title>
+	<style>
+		body { font-family: Arial, Helvetica, sans-serif; padding: 1rem; }
+		.controls { display:flex; gap:0.5rem; align-items:center; margin-bottom:0.75rem; }
+		/* keep controls above the gorilla so they're always clickable */
+		.controls { position: relative; z-index: 1000; }
+		#gorillaImage { display:block; /* ensure it sits on its own line */ z-index: 100; }
+		.step-display { font-weight:700; min-width:4rem; }
+	</style>
+</head>
+<body>
+	<div class="controls">
+		<button id="stepDown" type="button">- Step</button>
+		<span class="step-display">Step: <span id="stepValue">10</span>px</span>
+		<button id="stepUp" type="button">+ Step</button>
+		<button id="stepReset" type="button">Reset Step</button>
+		<div style="margin-left:1rem; display:flex; gap:0.4rem; align-items:center">
+			<button id="modeKeyboard" type="button">Keyboard</button>
+			<button id="modeMouse" type="button">Mouse</button>
+			<span id="modeLabel" style="color:#444;font-size:0.9rem; margin-left:0.5rem">Mode: Keyboard</span>
+		</div>
+	</div>
+
+	<img src="gorilla236x256.png" id="gorillaImage" alt="Gorilla">
+
+	<script>
+		'use strict';
+
+		let gorilla;
+		const defaultStep = 10;
+		let step = defaultStep; // pixels per move
+		const pressed = new Set();
+		let mode = 'keyboard'; // 'keyboard' or 'mouse'
+		let mouseMoveHandler = null;
+
+		function setMode(newMode) {
+			mode = newMode;
+			document.getElementById('modeLabel').textContent = 'Mode: ' + (mode === 'keyboard' ? 'Keyboard' : 'Mouse');
+			// visual active state
+			document.getElementById('modeKeyboard').disabled = (mode === 'keyboard');
+			document.getElementById('modeMouse').disabled = (mode === 'mouse');
+			// clear any pressed keys when switching modes
+			pressed.clear();
+
+			// attach/detach mouse handler
+				if (mode === 'mouse') {
+				if (!mouseMoveHandler) {
+					mouseMoveHandler = function (ev) {
+						// position gorilla so its center is at the cursor
+						const w = gorilla.offsetWidth || 0;
+						const h = gorilla.offsetHeight || 0;
+						// use pageX/Y to account for scrolling
+						let pageX = ev.pageX;
+						let pageY = ev.pageY;
+
+						// prevent gorilla from covering the controls: compute controls bottom in page coords
+						const controls = document.querySelector('.controls');
+						if (controls) {
+							const rect = controls.getBoundingClientRect();
+							const controlsBottomPage = rect.bottom + window.scrollY;
+							const minCenterY = controlsBottomPage + Math.round(h / 2) + 2; // small gap
+							if (pageY < minCenterY) pageY = minCenterY;
+						}
+
+						const x = pageX - Math.round(w / 2);
+						const y = pageY - Math.round(h / 2);
+						gorilla.style.left = x + 'px';
+						gorilla.style.top = y + 'px';
+					};
+				}
+				// disable pointer events on the gorilla so controls remain clickable even at edges
+				gorilla.style.pointerEvents = 'none';
+				window.addEventListener('mousemove', mouseMoveHandler);
+			} else {
+				if (mouseMoveHandler) window.removeEventListener('mousemove', mouseMoveHandler);
+				gorilla.style.pointerEvents = 'auto';
+			}
+		}
+
+		function init() {
+			gorilla = document.getElementById('gorillaImage');
+
+			// Ensure the gorilla has explicit top/left values we can parse
+			// Use absolute positioning so mouse coordinates map to document coords
+			gorilla.style.position = 'absolute';
+			if (!gorilla.style.left) gorilla.style.left = '0px';
+			if (!gorilla.style.top) gorilla.style.top = '0px';
+
+			// Step controls
+			document.getElementById('stepUp').addEventListener('click', function () {
+				step = Math.max(1, step + 1);
+				updateStepDisplay();
+			});
+
+			document.getElementById('stepDown').addEventListener('click', function () {
+				step = Math.max(1, step - 1);
+				updateStepDisplay();
+			});
+
+			document.getElementById('stepReset').addEventListener('click', function () {
+				step = defaultStep;
+				updateStepDisplay();
+			});
+
+			// Mode buttons
+			document.getElementById('modeKeyboard').addEventListener('click', function () { setMode('keyboard'); });
+			document.getElementById('modeMouse').addEventListener('click', function () { setMode('mouse'); });
+
+			// Keyboard controls: arrow keys with support for diagonal movement
+			window.addEventListener('keydown', function (ev) {
+				// ignore if user is typing in an input/textarea
+				const active = document.activeElement;
+				if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable)) return;
+
+					// only handle keyboard movement when mode is keyboard
+					if (mode !== 'keyboard') return;
+					const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+					if (arrows.includes(ev.key)) {
+						pressed.add(ev.key);
+						handlePressedMovement();
+						ev.preventDefault();
+					}
+			});
+
+			// Remove from pressed set on keyup
+			window.addEventListener('keyup', function (ev) {
+				// keyup only relevant to keyboard mode; still remove pressed key
+				pressed.delete(ev.key);
+			});
+
+			updateStepDisplay();
+			setMode('keyboard');
+		}
+
+		function updateStepDisplay() {
+			const el = document.getElementById('stepValue');
+			el.textContent = step;
+		}
+
+		function moveBy(dx, dy) {
+			const left = parseInt(gorilla.style.left, 10) || 0;
+			const top = parseInt(gorilla.style.top, 10) || 0;
+			gorilla.style.left = (left + dx) + 'px';
+			gorilla.style.top = (top + dy) + 'px';
+		}
+
+		function handlePressedMovement() {
+			let dx = 0, dy = 0;
+			if (pressed.has('ArrowLeft')) dx -= step;
+			if (pressed.has('ArrowRight')) dx += step;
+			if (pressed.has('ArrowUp')) dy -= step;
+			if (pressed.has('ArrowDown')) dy += step;
+			if (dx !== 0 || dy !== 0) moveBy(dx, dy);
+		}
+
+		window.addEventListener('load', init);
+	</script>
+</body>
+</html>
