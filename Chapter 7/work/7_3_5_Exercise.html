@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 7.3.5 — Power Calculator</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; padding: 1rem; }
+    label { display: block; margin-top: 0.5rem; }
+    input[type="number"] { width: 10rem; }
+    #result { font-weight: 700; }
+    .error { color: #b00; }
+  </style>
+</head>
+<body>
+  <h1>Power calculator (m<sup>n</sup>)</h1>
+  <form id="powerForm" onsubmit="return false;">
+    <label>Base (m): <input type="number" id="firstNumber" step="any" required></label>
+    <label>Exponent (integer n): <input type="number" id="secondNumber" step="1" required></label>
+    <div style="margin-top:0.5rem">
+      <input type="button" value="Calculate" onclick="calculate()">
+      <input type="reset" value="Clear" onclick="clearResult()">
+    </div>
+  </form>
+
+  <p>The result is: <span id="result"></span></p>
+  <p class="error" id="error"></p>
+
+  <script>
+    // compute power using a for-loop; displays result in the page
+    function clearResult() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('error').textContent = '';
+    }
+
+    function calculate() {
+      clearResult();
+      const mRaw = document.getElementById('firstNumber').value;
+      const nRaw = document.getElementById('secondNumber').value;
+
+      const m = parseFloat(mRaw);
+      const n = Number(nRaw);
+
+      const errorEl = document.getElementById('error');
+      const resultEl = document.getElementById('result');
+
+      if (Number.isNaN(m) || Number.isNaN(n)) {
+        errorEl.textContent = 'Please enter numeric values for base and exponent.';
+        return;
+      }
+
+      if (!Number.isInteger(n)) {
+        errorEl.textContent = 'The exponent must be an integer for this loop-based solution.';
+        return;
+      }
+
+      if (m === 0 && n === 0) {
+        errorEl.textContent = '0^0 is undefined.';
+        return;
+      }
+
+      const absN = Math.abs(n);
+      let result = 1;
+      for (let i = 0; i < absN; i++) {
+        result *= m;
+      }
+
+      if (n < 0) result = 1 / result;
+
+      // pretty format: if result is an integer show without decimals
+      if (Number.isFinite(result) && Math.floor(result) === result) {
+        resultEl.textContent = result;
+      } else {
+        resultEl.textContent = String(result);
+      }
+    }
+  </script>
+</body>
+</html>
