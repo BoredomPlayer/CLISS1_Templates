@@ -33,7 +33,7 @@
 <script>
 let priceOfClicker=10;
 let amountofclickers=0;
-let numberOfClicks=0;
+let numberOfClicks=Math.round(0*10)/10;
 let amountPerSecond=0;
 document.getElementById("cookii").addEventListener("mousedown", mouseClicked);
 document.getElementById("clickerhelper").addEventListener("mousedown", buyClicker);
@@ -52,7 +52,7 @@ document.getElementById("Amount per Second").innerHTML="Amount per Second="+amou
 setInterval(function(){
     numberOfClicks+=(amountofclickers/10);
     document.getElementById("numberClicks").innerHTML="Amount="+numberOfClicks;
-},1000);
+},10000);
 
 }
 }
