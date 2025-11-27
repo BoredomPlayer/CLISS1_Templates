@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<title>Mouse movement and clicking</title>
+<meta charset="UTF-8">
+</head>
+<body>
+<p id="numberClicks">Amount=0 </p>
+<p id="Amount per Second">Amount per Second=0 </p>
+<img id="cookii" src ="cookii.jpg" alt="Cookie" width="250" height="250"/>
+<img id="clickerhelper" src="clickerhelper.jpg" alt="Clicker Helper" width="350" height="90" style="position:absolute; top:100px; right:15px; background-color: blueviolet;"/>
+<p id="costofclicker" style="position:absolute; top:200px; right:25px; font-size:20px; font-weight:bold;">Cost: 10</p>
+<p id="amountofclickers" style="position:absolute; top:230px; right:25px; font-size:20px; font-weight:bold;">Amount: 0</p>
+
+<style>
+    #cookii {
+        position :absolute;
+        top: 220px;
+        left: 125px;
+        cursor: pointer;
+    }
+    #numberClicks {
+        position: absolute;
+        top: 50px;
+        left: 200px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    #clickerhelper {
+        cursor: pointer;
+    }
+</style>
+<script>
+let priceOfClicker=10;
+let amountofclickers=0;
+let numberOfClicks=0;
+let amountPerSecond=0;
+document.getElementById("cookii").addEventListener("mousedown", mouseClicked);
+document.getElementById("clickerhelper").addEventListener("mousedown", buyClicker);
+
+function buyClicker()
+{
+if(numberOfClicks>=priceOfClicker)
+{++amountofclickers;
+numberOfClicks-=priceOfClicker;
+priceOfClicker=Math.floor(priceOfClicker*1.2);
+document.getElementById("costofclicker").innerHTML="Cost: "+priceOfClicker;
+document.getElementById("amountofclickers").innerHTML="Amount: "+amountofclickers;
+document.getElementById("numberClicks").innerHTML="Amount="+numberOfClicks;
+amountPerSecond + 0.1;
+document.getElementById("Amount per Second").innerHTML="Amount per Second="+amountPerSecond;
+setInterval(function(){
+    numberOfClicks+=(amountofclickers/10);
+    document.getElementById("numberClicks").innerHTML="Amount="+numberOfClicks;
+},1000);
+
+}
+}
+
+function mouseClicked()
+{
+numberOfClicks++;
+let pClicks=document.getElementById("numberClicks");
+pClicks.innerHTML="Amount="+numberOfClicks;
+}
+
+</script>
+</body>
+</html>

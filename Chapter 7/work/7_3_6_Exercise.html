@@ -14,7 +14,16 @@
             <span id = "result"></span>
             </p>
         <script>
-           //start coding here           
+            document.getElementById("cButton").onclick = function() {
+                let n = parseInt(document.getElementById("aNumber").value);
+                let sum = 0;
+                for (let i = 1; i <= n; i++) {
+                    sum += i;
+                }
+                document.getElementById("result").innerText = sum;
+            };
+            
+
         </script>
     </body>
 </html>
