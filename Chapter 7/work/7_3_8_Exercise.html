@@ -5,14 +5,32 @@
     <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Create Grid</h1>
+        <h1>Create Grid out of # symbol in console.log</h1>
         <form>
             Height : <input type="number" id="gridHeight" /><br>
             Width: <input type="number" id="gridWidth" /><br>
             <input type="button" onClick="createGrid()" Value="Create Grid" />
         </form>
         <script>
-            //start coding here
+              //start of createGrid function
+              function createGrid(){
+                //get the values from the input boxes
+                let height = parseInt(document.getElementById("gridHeight").value);
+                let width = parseInt(document.getElementById("gridWidth").value);
+                let grid = "";
+                //loop through height
+                for(let i=0; i<height; i++){
+                     //loop through width
+                     for(let j=0; j<width; j++){
+                          //add # to grid
+                          grid += "#";
+                     }
+                     //add new line to grid
+                     grid += "\n";
+                }
+                //output the grid to console
+                console.log(grid);
+              }
         </script>
     </body>
 </html>
