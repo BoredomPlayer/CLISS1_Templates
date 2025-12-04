@@ -6,7 +6,7 @@
 </head>
 <body>
 <p id="numberClicks">Amount=0 </p>
-<p id="Amount per Second">Amount per Second=0 </p>
+<p id="amountPerSecond">Amount per Second=0 </p>
 <p id="rebirthcost" style="position:absolute; top:10px; right: 950px; font-size:20px; font-weight:bold;">[locked]</p>
 <img id="cookii" src ="Images/cookii.jpg" alt="Cookie" width="250" height="250"/>
 <img id="clickerhelper" src="Images/clickerhelper.jpg" alt="Clicker Helper" width="250" height="100" style="position:absolute; top:100px; right:15px;"/>
@@ -14,9 +14,9 @@
 <img id="ClickerBooster1" src="Images/ClickerBooster1.png" alt="Clicker Booster 1" width="25" height="25" style="position:absolute; top:30px; right:15px;" hidden/>
 <img id="ClickerBooster2" src="Images/ClickerBooster2.png" alt="Clicker Booster 2" width="25" height="25" style="position:absolute; top:60px; right:15px;" hidden/>
 <img id="ClickerBooster3" src="Images/ClickerBooster3.png" alt="Clicker Booster 3" width="25" height="25" style="position:absolute; top:90px; right:15px;" hidden/>
-<img id="OvenBooster1" src="Images/OvenBooster1.png" alt="Oven Booster 1" width="25" height="25" style="position:absolute; top:130px; right:15px;" hidden/>
+<img id="OvenBooster1" src="Images/OvenBooster1.webp" alt="Oven Booster 1" width="25" height="25" style="position:absolute; top:130px; right:15px;" hidden/>
 <img id="OvenBooster2" src="Images/OvenBooster2.png" alt="Oven Booster 2" width="25" height="25" style="position:absolute; top:160px; right:15px;" hidden/>
-<img id="OvenBooster3" src="Images/OvenBooster3.png" alt="Oven Booster 3" width="25" height="25" style="position:absolute; top:190px; right:15px;" hidden/>
+<img id="OvenBooster3" src="Images/OvenBooster3.jpg" alt="Oven Booster 3" width="25" height="25" style="position:absolute; top:190px; right:15px;" hidden/>
 <p id="costofclicker" style="position:absolute; top:110px; right:280px; font-size:20px; font-weight:bold;">Cost: 10</p>
 <p id="amountofclickers" style="position:absolute; top:125px; right:280px; font-size:20px; font-weight:bold;">Amount: 0</p>
 <p id="costofoven" style="position:absolute; top:210px; right:280px; font-size:20px; font-weight:bold;"hidden>Cost: 250</p>
@@ -76,7 +76,23 @@ let clickerbooster3=false;
 let ovenbooster1=false;
 let ovenbooster2=false;
 let ovenbooster3=false;
-let numberOfClicks=amountofclickers * amountfromclicker + amountofovens * amountfromoven;
+let numberOfClicks = 0;
+
+// recalculate passive income based on owned items and per-item rates
+function recalcAmountPerSecond(){
+    amountPerSecond = amountofclickers * amountfromclicker + amountofovens * amountfromoven;
+}
+
+function updateDisplays(){
+    // update main displays
+    document.getElementById("numberClicks").innerHTML = "Amount="+formatAmount(numberOfClicks);
+    document.getElementById("amountPerSecond").innerHTML = "Amount per Second="+formatAmount(amountPerSecond);
+    // update shop displays
+    document.getElementById("costofclicker").innerHTML = "Cost: "+priceOfClicker;
+    document.getElementById("amountofclickers").innerHTML = "Amount: "+amountofclickers;
+    document.getElementById("costofoven").innerHTML = "Cost: "+priceOfOven;
+    document.getElementById("amountofovens").innerHTML = "Amount: "+amountofovens;
+}
 
 // helper to format numbers with at most one decimal place
 function formatAmount(n){
@@ -94,6 +110,10 @@ document.getElementById("OvenBooster1").addEventListener("mousedown", geto_boost
 document.getElementById("OvenBooster2").addEventListener("mousedown", geto_booster2);
 document.getElementById("OvenBooster3").addEventListener("mousedown", geto_booster3);
 setInterval(howmanycookies,100);
+
+// initial display update
+recalcAmountPerSecond();
+updateDisplays();
 
 function howmanycookies(){
 if (numberOfClicks<rebirthprice) {
@@ -119,10 +139,9 @@ function buyClicker()
         ++amountofclickers;
         numberOfClicks-=priceOfClicker;
         priceOfClicker=Math.floor(priceOfClicker*1.2);
-        document.getElementById("costofclicker").innerHTML="Cost: "+priceOfClicker;
-        document.getElementById("amountofclickers").innerHTML="Amount: "+amountofclickers;
-        document.getElementById("numberClicks").innerHTML="Amount="+formatAmount(numberOfClicks);
-        document.getElementById("Amount per Second").innerHTML="Amount per Second="+formatAmount(amountPerSecond);
+        // recalc passive income and refresh displays
+        recalcAmountPerSecond();
+        updateDisplays();
     }
 }
 
@@ -133,27 +152,23 @@ function buyOven()
         ++amountofovens;
         numberOfClicks-=priceOfOven;
         priceOfOven=Math.floor(priceOfOven*1.2);
-        document.getElementById("numberClicks").innerHTML="Amount="+formatAmount(numberOfClicks);
-        document.getElementById("costofoven").innerHTML="Cost: "+priceOfOven;
-        document.getElementById("amountofovens").innerHTML="Amount: "+amountofovens;
-        amountPerSecond += 1; // each oven adds 1 per second
-        document.getElementById("Amount per Second").innerHTML="Amount per Second="+formatAmount(amountPerSecond);
+        // recalc passive income and refresh displays
+        recalcAmountPerSecond();
+        updateDisplays();
     }
 }
 
 function mouseClicked()
 {
     numberOfClicks++;
-    let pClicks=document.getElementById("numberClicks");
-    pClicks.innerHTML="Amount="+formatAmount(numberOfClicks);
+    updateDisplays();
 }
 
 // single global timer: add amountPerSecond once per second
 setInterval(function(){
-    if (amountPerSecond > 0) {
-        numberOfClicks += amountPerSecond;
-        document.getElementById("numberClicks").innerHTML="Amount="+formatAmount(numberOfClicks);
-    }
+    // add passive income (may be fractional) every second
+    if (amountPerSecond !== 0) numberOfClicks += amountPerSecond;
+    updateDisplays();
 }, 1000);
 
 setInterval (function(){
@@ -162,11 +177,11 @@ setInterval (function(){
         document.getElementById("ClickerBooster1").hidden = false;
         clickerbooster1 = true;
     }
-        if (!clickerbooster2 && amountofclickers >= 50) {
+        if (!clickerbooster2 && amountofclickers >= 25) {
         // code to show ClickerBooster2 goes here
         clickerbooster2 = true;
     }
-        if (!clickerbooster3 && amountofclickers >= 100) {
+        if (!clickerbooster3 && amountofclickers >= 50) {
         // code to show ClickerBooster3 goes here
         clickerbooster3 = true;
     }
@@ -175,34 +190,76 @@ setInterval (function(){
         document.getElementById("costofoven").hidden=false;
         document.getElementById("amountofovens").hidden=false;
         }
-}, 500);
+    if (!ovenbooster1 && amountofovens >= 10) {
+        document.getElementById("OvenBooster1").hidden = false;
+        ovenbooster1 = true;
+    }
+        if (!ovenbooster2 && amountofovens >= 25) {
+        // code to show OvenBooster2 goes here
+        ovenbooster2 = true;
+    }
+        if (!ovenbooster3 && amountofovens >= 50) {
+        // code to show OvenBooster3 goes here
+        ovenbooster3 = true;
+    }
+}, 500)
     function getc_booster1(){
         if (numberOfClicks >= 500){
             numberOfClicks -= 500;
-            let amountfromclicker=amountfromclicker*2; // double clicker rate
-            amountPerSecond += amountofclickers * 0.1; // increase amountPerSecond based on new clicker rate
-            document.getElementById("Amount per Second").innerHTML="Amount per Second="+formatAmount(amountPerSecond);
+            // double global clicker rate
+            amountfromclicker *= 2;
+            // recalc passive income and refresh displays
+            recalcAmountPerSecond();
+            updateDisplays();
             document.getElementById("ClickerBooster1").hidden = true;
         }
     }
         function getc_booster2(){
         if (numberOfClicks >= 4000){
             numberOfClicks -= 4000;
-            let amountfromclicker=amountfromclicker*2; // double clicker rate
-            amountPerSecond += amountofclickers * 0.1; // increase amountPerSecond based on new clicker rate
-            document.getElementById("Amount per Second").innerHTML="Amount per Second="+formatAmount(amountPerSecond);
+                amountfromclicker *= 2;
+                recalcAmountPerSecond();
+                updateDisplays();
             document.getElementById("ClickerBooster2").hidden = true;
         }
     }
         function getc_booster3(){
         if (numberOfClicks >= 10000){
             numberOfClicks -= 10000;
-            let amountfromclicker=amountfromclicker*2; // double clicker rate
-            amountPerSecond += amountofclickers * 0.1; // increase amountPerSecond based on new clicker rate
-            document.getElementById("Amount per Second").innerHTML="Amount per Second="+formatAmount(amountPerSecond);
+                amountfromclicker *= 2;
+                recalcAmountPerSecond();
+                updateDisplays();
             document.getElementById("ClickerBooster3").hidden = true;
         }
+        }
+        function geto_booster1(){
+        if (numberOfClicks >= 2000){
+            numberOfClicks -= 2000;
+                amountfromoven *= 2;
+                recalcAmountPerSecond();
+                updateDisplays();
+            document.getElementById("OvenBooster1").hidden = true;
+        }
     }
+        function geto_booster2(){
+        if (numberOfClicks >= 8000){
+            numberOfClicks -= 8000;
+                amountfromoven *= 2;
+                recalcAmountPerSecond();
+                updateDisplays();
+            document.getElementById("OvenBooster2").hidden = true;
+        }
+    }
+        function geto_booster3(){
+        if (numberOfClicks >= 20000){
+            numberOfClicks -= 20000;
+                amountfromoven *= 2;
+                recalcAmountPerSecond();
+                updateDisplays();
+            document.getElementById("OvenBooster3").hidden = true;
+        }
+    }
+
 
 
 </script>
