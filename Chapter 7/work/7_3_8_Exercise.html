@@ -13,24 +13,28 @@
         </form>
         <script>
               //start of createGrid function
-              function createGrid(){
-                //get the values from the input boxes
-                let height = parseInt(document.getElementById("gridHeight").value);
-                let width = parseInt(document.getElementById("gridWidth").value);
-                let grid = "";
-                //loop through height
-                for(let i=0; i<height; i++){
-                     //loop through width
-                     for(let j=0; j<width; j++){
-                          //add # to grid
-                          grid += "#";
-                     }
-                     //add new line to grid
-                     grid += "\n";
-                }
-                //output the grid to console
-                console.log(grid);
-              }
+                            function createGrid(){
+                                // get the values from the input boxes
+                                let height = parseInt(document.getElementById("gridHeight").value, 10);
+                                let width = parseInt(document.getElementById("gridWidth").value, 10);
+
+                                // basic validation and defaults
+                                if (!Number.isInteger(height) || height <= 0) height = 8;
+                                if (!Number.isInteger(width) || width <= 0) width = 8;
+
+                                let grid = "";
+                                // Build a chessboard pattern: alternate '#' and ' ' so that
+                                // squares at (i,j) with (i+j) even are '#'.
+                                for (let i = 0; i < height; i++) {
+                                    for (let j = 0; j < width; j++) {
+                                        grid += ((i + j) % 2 === 0) ? "#" : " ";
+                                    }
+                                    grid += "\n";
+                                }
+
+                                // output the grid to console
+                                console.log(grid);
+                            }
         </script>
     </body>
 </html>

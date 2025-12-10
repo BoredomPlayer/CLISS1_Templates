@@ -17,6 +17,12 @@
 <img id="OvenBooster1" src="Images/OvenBooster1.webp" alt="Oven Booster 1" width="25" height="25" style="position:absolute; top:130px; right:15px;" hidden/>
 <img id="OvenBooster2" src="Images/OvenBooster2.png" alt="Oven Booster 2" width="25" height="25" style="position:absolute; top:160px; right:15px;" hidden/>
 <img id="OvenBooster3" src="Images/OvenBooster3.jpg" alt="Oven Booster 3" width="25" height="25" style="position:absolute; top:190px; right:15px;" hidden/>
+<p id="CB1_Price" hidden>Cost: 500</p>
+<p id="CB2_Price" hidden>Cost: 4000</p>
+<p id="CB3_Price" hidden>Cost: 10000</p>
+<p id="OB1_Price" hidden>Cost: 2000</p>
+<p id="OB2_Price" hidden>Cost: 8000</p>
+<p id="OB3_Price" hidden>Cost: 20000</p>
 <p id="costofclicker" style="position:absolute; top:110px; right:280px; font-size:20px; font-weight:bold;">Cost: 10</p>
 <p id="amountofclickers" style="position:absolute; top:125px; right:280px; font-size:20px; font-weight:bold;">Amount: 0</p>
 <p id="costofoven" style="position:absolute; top:210px; right:280px; font-size:20px; font-weight:bold;"hidden>Cost: 250</p>
@@ -44,6 +50,7 @@
     }
     #cliclkerbooster1 {
         cursor: pointer;
+        
     }
     #cliclkerbooster2 {
         cursor: pointer;
@@ -65,7 +72,7 @@
 let priceOfClicker=10;
 let amountofclickers=0;
 let amountofovens=0;
-let priceOfOven=250;
+let priceOfOven=150;
 let amountPerSecond=0;
 let rebirthprice=1000000;
 let amountfromoven=1;
@@ -138,7 +145,7 @@ function buyClicker()
     {
         ++amountofclickers;
         numberOfClicks-=priceOfClicker;
-        priceOfClicker=Math.floor(priceOfClicker*1.2);
+        priceOfClicker=Math.floor(priceOfClicker*1.1);
         // recalc passive income and refresh displays
         recalcAmountPerSecond();
         updateDisplays();
@@ -151,7 +158,7 @@ function buyOven()
     {
         ++amountofovens;
         numberOfClicks-=priceOfOven;
-        priceOfOven=Math.floor(priceOfOven*1.2);
+        priceOfOven=Math.floor(priceOfOven*1.1);
         // recalc passive income and refresh displays
         recalcAmountPerSecond();
         updateDisplays();
@@ -185,7 +192,7 @@ setInterval (function(){
         // code to show ClickerBooster3 goes here
         clickerbooster3 = true;
     }
-        if (numberOfClicks >=200){
+        if (numberOfClicks >=120 && amountofovens ===0){
         document.getElementById("cookieoven").hidden = false;
         document.getElementById("costofoven").hidden=false;
         document.getElementById("amountofovens").hidden=false;
