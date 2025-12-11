@@ -29,9 +29,15 @@
         calculateButton.addEventListener("click", calculateTotalSongDuration);
         function calculateTotalSongDuration()
         {
-            //write in here your code
+            let selectedOptions = itemList.selectedOptions;
+            let totalDuration = 0;
+            for (let i = 0; i < selectedOptions.length; i++) {
+                totalDuration += parseInt(selectedOptions[i].value);
+            }
+            let minutes = Math.floor(totalDuration / 60);
+            let seconds = totalDuration % 60;
+            resultBox.textContent = `Total Duration: ${minutes} minutes and ${seconds} seconds.`;
         }
-        //https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
         </script>
     </body>
 </html>
