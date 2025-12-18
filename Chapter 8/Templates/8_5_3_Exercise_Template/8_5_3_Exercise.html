@@ -12,7 +12,8 @@
     
     <body>
         <h1>Student List</h1>
-        
+        <img id="genderImageMale" src="Male.jpg" style="display:none;" />
+        <img id="genderImageFemale" src="Female.jpg" style="display:none;" />
         <form action="">
             <label for="name">Student name: </label>
             <input type="text" id="name">
@@ -44,10 +45,46 @@
         
         function addStudent()
         {
-             //write here your code
-            //...
-        }
-        
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let gender = document.getElementById("gender").value;
+            let table = document.getElementById("table");
+            table.style.display = "table";
+            let newRow = table.insertRow(-1);
+            let nameCell = newRow.insertCell(0);
+            let ageCell = newRow.insertCell(1);
+            let genderCell = newRow.insertCell(2);
+            nameCell.innerHTML = name;
+            ageCell.innerHTML = age;
+            // show name and age text
+            genderCell.innerHTML = ""; // will fill with image or text below
+
+            // decide which image (if any) to show for gender
+            const g = String(gender).trim().toLowerCase();
+            if (g === 'male') {
+                const img = document.createElement('img');
+                img.src = 'Male.jpg';
+                img.alt = 'Male';
+                img.style.width = '40px';
+                img.style.height = 'auto';
+                genderCell.appendChild(img);
+            } else if (g === 'female') {
+                const img = document.createElement('img');
+                img.src = 'Female.jpg';
+                img.alt = 'Female';
+                img.style.width = '40px';
+                img.style.height = 'auto';
+                genderCell.appendChild(img);
+            } else {
+                // unknown/other — just display the entered text
+                genderCell.textContent = gender;
+            }
+
+            // clear the form fields
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("gender").value = "";
+    }
         </script>
     </body>
 </html>

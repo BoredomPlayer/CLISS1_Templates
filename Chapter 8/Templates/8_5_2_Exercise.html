@@ -14,11 +14,15 @@
         function checkForLastName() {
             let targetField=document.getElementById("lastNameField");
             if (document.getElementById("lastNameField").value.length === 0) {
-            alert("Please enter your last name"); 
-            return false;
+            document.getElementById("lastNameField").style.background="yellow";
+            document.getElementById("lastNameField").select();
+            document.getElementById("lastNameField").focus();
+            return false;}
+            else {
+            document.getElementById("lastNameField").style.background="white";
+            return true;
             }
         }
         </script>
     </body>
 </html>
-

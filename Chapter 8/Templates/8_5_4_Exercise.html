@@ -5,7 +5,43 @@
     <title>Exercise 8.5.4: Form validation</title>
   <script type="text/javascript">
       function CheckAndSubmit () {
-          //Please write here your code
+          let userName = document.getElementById("userName").value;
+          let email = document.getElementById("email").value;
+          let phone = document.getElementById("phone").value;
+          let acceptAgreement = document.getElementById("acceptAgreement").checked;
+        //comment needs 200 word limit
+        let comment = document.getElementById("comment").value;
+        if (comment.length > 200) {
+            alert("Comment must be 200 characters or less.");
+            document.getElementById("comment").focus();
+            return false;
+        }
+          if (userName === "") {
+              alert("Please enter a user name.");
+              document.getElementById("userName").focus();
+              return false;
+          }
+
+          if (email === "" || !email.includes("@")) {
+              alert("Please enter a valid email address.");
+              document.getElementById("email").focus();
+              return false;
+          }
+
+          if (phone === "" || isNaN(phone)) {
+              alert("Please enter a valid phone number.");
+              document.getElementById("phone").focus();
+              return false;
+          }
+
+          if (!acceptAgreement) {
+              alert("You must accept the User Agreement and Privacy Policy.");
+              document.getElementById("acceptAgreement").focus();
+              return false;
+          }
+
+          // If all validations pass, allow form submission
+          return true;
       }
   </script>
 </head>
