@@ -12,23 +12,23 @@
         //comment needs 200 word limit
         let comment = document.getElementById("comment").value;
         if (comment.length > 200) {
-            alert("Comment must be 200 characters or less.");
+            alert("Comment may not exceed 200 characters.");
             document.getElementById("comment").focus();
             return false;
         }
-          if (userName === "") {
-              alert("Please enter a user name.");
+          if (userName === ""|| userName.length < 5 || userName.length > 20) {
+              alert("Please enter a valid user name.");
               document.getElementById("userName").focus();
               return false;
           }
 
-          if (email === "" || !email.includes("@")) {
+          if (email === "" || !email.includes("@") || !email.includes(".")) {
               alert("Please enter a valid email address.");
               document.getElementById("email").focus();
               return false;
           }
 
-          if (phone === "" || isNaN(phone)) {
+          if (phone === "" || isNaN(phone) || phone.length > 15) {
               alert("Please enter a valid phone number.");
               document.getElementById("phone").focus();
               return false;
